@@ -1,30 +1,28 @@
-import React from 'react';
-import {Redirect} from 'react-router-dom';
-import taskSearch from '../components/task/taskSearch';
-import taskAudit from '../components/task/taskAudit';
-import home from '../view/home/home';
-import system from '../view/system/system';
-import NotFound from '../view/notFound';
-import Auth from '../router/auto';
+import { useRoutes,useNavigate  } from 'react-router-dom' // 引入所需要路由的页面
+// import { Redirect } from '@/router/redirect'
+import { useEffect } from "react";
+import App from '../App'
+import Home from '../page/home/home';
+import System from '../page/system/system';
+import NotFound from '../page/notFound';
 
+function Redirect({ to }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+        navigate(to);
+    });
+    return null;
+}
 
-const routers = [
-  {path: '/404', component: NotFound},
-  {path: '/', exact: true, render: () => <Redirect to="/home" />},
-  {path: '/system', component: system},
-  {
-    path: '/home',
-    component: home,
-    children: [
-      {
-        path: '/home/taskSearch',
-        component: taskSearch
-      },
-      {
-        path: '/home/taskAudit',
-        component: taskAudit
-      }
-    ]
-  }
-];
-export default routers;
+const routerMenu = [
+    {path: "home", element: <Home/>, children: []},
+    { path: "app", element: <App/> },
+    { path: "/404", element: <NotFound/> },
+    {path: '/system', element: <System/>},
+    { path: "*", element: <Redirect to="/404" /> },
+    { path: "/", element: <Redirect to="/home" /> }
+]
+function Router(){
+    return useRoutes(routerMenu)
+}
+export default Router
