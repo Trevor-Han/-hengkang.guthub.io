@@ -5,18 +5,68 @@
     <link rel="icon" type="image/svg+xml" href="/hengkang.guthub.io/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, orientation=landscape">
     <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/hengkang.guthub.io/static/index-9wjaDSGC.js"></script>
+    <style>
+      html {
+        /*用于 获取 屏幕的可视宽高*/
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        /*用于 测试的 样式*/
+        background-color: #444;
+        color: #FFF;
+        letter-spacing: 4px;
+        font-size: 28px;
+        /*文字居中*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      @media screen and (orientation:portrait) {
+        /*竖屏样式*/
+        body {
+          transform-origin: 0 0;
+          transform: rotateZ(90deg) translateY(-100%);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/hengkang.guthub.io/static/index-ChBfJBNG.js"></script>
     <link rel="modulepreload" crossorigin href="/hengkang.guthub.io/static/react-CEZk2wmh.js">
     <link rel="modulepreload" crossorigin href="/hengkang.guthub.io/static/three-DIB8jkB1.js">
     <link rel="modulepreload" crossorigin href="/hengkang.guthub.io/static/r3f-BaHixKPv.js">
     <link rel="modulepreload" crossorigin href="/hengkang.guthub.io/static/gsap-BN-z8O7O.js">
-    <link rel="stylesheet" crossorigin href="/hengkang.guthub.io/static/index-DiDRIoqW.css">
+    <link rel="stylesheet" crossorigin href="/hengkang.guthub.io/static/index-CpjHntwj.css">
   </head>
   <body>
     <div id="root"></div>
 
   </body>
   <script>
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    }, false);
     document.documentElement.setAttribute('data-theme', 'light');
+    (function () {
+      function resize() {
+        const body = document.getElementsByTagName('body')[0];
+        const html = document.getElementsByTagName('html')[0];
+        const width = html.clientWidth;
+        const height =  html.clientHeight;
+        const max = width > height ? width : height;
+        const min = width > height ? height : width;
+        body.style.width = max + "px";
+        body.style.height = min + "px";
+      }
+      resize();
+      window.addEventListener("resize", resize)
+    })();
   </script>
 </html>
